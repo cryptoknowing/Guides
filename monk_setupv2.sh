@@ -38,8 +38,13 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo && echo && echo
 
 if [[ $(lsb_release -d) != *16.04* ]]; then
-   echo -e "${RED}The operating system is not Ubuntu 16.04. You must be running on ubuntu 16.04.${NC}"
-   exit 1
+   echo -e "${RED}The operating system is not Ubuntu 16.04. You must be running on Ubuntu 16.04! Do you really want to continue? [y/n]${NC}"
+   read OS_QUESTION
+   if [[ ${OS_QUESTION,,} =~ "y" ]] ; then
+      echo -e "${RED}You are on your own now!${NC}"
+   else
+      exit -1
+   fi
 fi
 
 function get_ip() {
